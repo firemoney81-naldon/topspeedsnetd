@@ -1,23 +1,655 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "InternetService",
+      "name": "군포인터넷가입 비교센터",
+      "url": "https://yourdomain.com",
+      "areaServed": {
+        "@type": "AdministrativeArea",
+        "name": "군포시",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "KR",
+          "addressRegion": "경기도",
+          "addressLocality": "군포시",
+          "areaServed": ["산본동", "금정동", "당정동", "부곡동", "대야동", "오금동", "광정동"]
+        }
+      },
+      "provider": {
+        "@type": "Organization",
+        "name": "인터넷 가입 비교 전문 업체",
+        "url": "https://yourdomain.com",
+        "logo": "https://yourdomain.com/logo.png"
+      },
+      "description": "군포 지역 최신 인터넷 요금제 비교, SKT, KT, LG U+ 통신사별 혜택 분석 및 최대 현금 사은품 제공. 2026년 최신 정보 기반 맞춤형 인터넷 가입 컨설팅 서비스.",
+      "serviceType": "초고속 인터넷, 기가 인터넷, IPTV, 결합 상품",
+      "review": [
+        {
+          "@type": "Review",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "4.9",
+            "bestRating": "5"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "김**"
+          },
+          "reviewBody": "군포 산본으로 이사하면서 인터넷 가입했는데, 여러 업체 비교해보고 여기서 결정했어요. 현금 사은품도 많이 받고 상담도 친절해서 만족합니다."
+        }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "군포 인터넷 요금제 상품",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "KT 기가인터넷 (1G)"
+            },
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": "38500",
+              "priceCurrency": "KRW",
+              "unitText": "월"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "SKT 초고속인터넷 (500M)"
+            },
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": "33000",
+              "priceCurrency": "KRW",
+              "unitText": "월"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "LG U+ TV결합상품"
+            },
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": "44000",
+              "priceCurrency": "KRW",
+              "unitText": "월"
+            }
+          }
+        ]
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: "Noto Sans KR", sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.8;
+      background-color: #f7f9fc; /* 부드러운 배경색 */
+      color: #333;
+      word-break: keep-all; /* 한글 단어 단위 줄바꿈 */
+    }
+    header {
+      background-color: #004d99; /* 메인 컬러: 깊은 파란색 */
+      color: white;
+      padding: 2.5rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 0.5rem 0 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+    header p {
+      font-size: 1.2rem;
+      margin: 0;
+      font-weight: 300;
+      opacity: 0.9;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin: 1.5rem 0 0;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease, transform 0.3s ease;
+      font-size: 1.1rem;
+      position: relative;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 100%;
+      height: 2px;
+      background-color: transparent;
+      transition: background-color 0.3s ease;
+    }
+    nav a:hover {
+      color: #ffc107; /* 밝은 노란색 강조 */
+      transform: translateY(-2px);
+    }
+    nav a:hover::after {
+      background-color: #ffc107;
+    }
+    main {
+      max-width: 1100px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem;
+      background-color: white;
+      box-shadow: 0 0 20px rgba(0,0,0,0.05);
+      border-radius: 12px;
+    }
+    section {
+      padding: 2rem 0;
+    }
+    h1, h2 {
+      color: #003366; /* 진한 남색 */
+      font-weight: 700;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-bottom: 3px solid #e0f0ff;
+    }
+    h2 {
+      font-size: 2rem;
+      text-align: center;
+      padding-bottom: 1rem;
+      border-bottom: 3px solid #e0f0ff;
+    }
+    h3 {
+      color: #004d99;
+      font-size: 1.6rem;
+      margin-top: 1.5rem;
+      border-left: 5px solid #004d99;
+      padding-left: 1rem;
+    }
+    p {
+      text-align: justify;
+      margin-bottom: 1.5rem;
+      color: #555;
+    }
+    ul, ol {
+      padding-left: 2rem;
+    }
+    li {
+      margin-bottom: 0.8rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      font-size: 0.95rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 1.2rem;
+      border: 1px solid #e0e0e0;
+      text-align: center;
+    }
+    th {
+      background-color: #004d99;
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    tr:nth-child(even) {
+      background-color: #f8f8f8;
+    }
+    .call-to-action {
+      text-align: center;
+      margin: 3rem 0;
+      background-color: #e6f7ff; /* 라이트 블루 배경 */
+      padding: 2rem;
+      border-radius: 10px;
+    }
+    .cta-button {
+      display: inline-block;
+      background-color: #ff6600; /* 오렌지색 강조 */
+      color: white;
+      font-weight: 700;
+      padding: 1.2rem 3.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      font-size: 1.3rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .cta-button:hover {
+      background-color: #e65c00;
+      transform: translateY(-2px);
+    }
+    .keyword-tags {
+      margin: 2rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      padding-bottom: 1rem;
+    }
+    .keyword-tags a {
+      background-color: #e0f0ff;
+      color: #0066cc;
+      padding: 8px 16px;
+      border-radius: 25px;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .keyword-tags a:hover {
+      background-color: #b3d1ff;
+      transform: scale(1.05);
+    }
+    .faq-accordion dt {
+      font-weight: 700;
+      margin-top: 1.5rem;
+      cursor: pointer;
+      color: #0066cc;
+      background-color: #f5fafd;
+      padding: 1.2rem;
+      border-radius: 8px;
+      border-left: 5px solid #0066cc;
+      transition: background-color 0.3s ease;
+    }
+    .faq-accordion dt:hover {
+      background-color: #e6f2ff;
+    }
+    .faq-accordion dd {
+      margin: 0.5rem 0 1.5rem 1rem;
+      padding: 1rem 1rem 1rem 2rem;
+      border-left: 2px dashed #ccc;
+      display: none;
+      color: #555;
+    }
+    .faq-accordion dt.active + dd {
+      display: block;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #777;
+      background-color: #e0eaf1;
+      margin-top: 3rem;
+      border-top: 1px solid #d0dbe4;
+    }
+    .external-link {
+      display: inline-block;
+      color: #0066cc;
+      font-weight: 500;
+      margin-top: 1rem;
+      text-decoration: none;
+      border-bottom: 1px solid #0066cc;
+    }
+    .info-box {
+      background-color: #fdfae6;
+      border: 1px solid #f9eeb4;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin: 2rem 0;
+      color: #6a5a00;
+    }
+    .info-box strong {
+      color: #d4a000;
+    }
+    .price-table-container {
+      overflow-x: auto;
+    }
+    .price-table-container table {
+      min-width: 700px; /* 테이블이 작아지지 않도록 최소 너비 지정 */
+    }
+    .form-section {
+      background-color: #f7fcff;
+      padding: 2rem;
+      border-radius: 10px;
+      border: 1px solid #e0eaf1;
+      margin-top: 2rem;
+    }
+    .form-section h3 {
+      text-align: center;
+      border-left: none;
+      padding-left: 0;
+      color: #004d99;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #333;
+    }
+    .form-group input, .form-group select {
+      width: calc(100% - 20px);
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    .form-group button {
+      width: 100%;
+      padding: 12px;
+      background-color: #0066cc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: background-color 0.3s ease;
+    }
+    .form-group button:hover {
+      background-color: #0052a3;
+    }
+    .local-info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 2rem;
+    }
+    .local-info-card {
+      background-color: #fcfcfc;
+      border: 1px solid #eee;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    }
+    .local-info-card h4 {
+      color: #0066cc;
+      margin-top: 0;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>군포인터넷가입 설치 비교견적 센터</h1>
+    <p>군포시 산본동, 금정동, 당정동 최저가 인터넷 가입, 현금 사은품 최대 지원!</p>
     <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
+      <ul>
+        <li><a href="#서비스소개">서비스 소개</a></li>
+        <li><a href="#가격비교">가격 및 요금제</a></li>
+        <li><a href="#가입절차">가입 절차</a></li>
+        <li><a href="#사은품혜택">사은품 혜택</a></li>
+        <li><a href="#고객후기">고객 후기</a></li>
+        <li><a href="#자주묻는질문">자주 묻는 질문</a></li>
+        <li><a href="#견적문의">견적 문의</a></li>
+      </ul>
     </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+  </header>
+
+  <main>
+    <section id="서비스소개">
+      <h2>군포 인터넷 가입, 왜 비교해야 할까요?</h2>
+      <p>군포시는 산본신도시를 중심으로 주거 밀집도가 높고, 최근 재개발 및 신축 아파트 입주가 활발하게 이루어지고 있습니다. 특히 금정역세권, 당정역 주변, 부곡지구, 송정지구 등 다양한 지역에서 신규 아파트 입주가 진행되면서 **군포인터넷** 수요도 급증하고 있습니다. 하지만 수많은 인터넷 업체와 복잡한 요금제, 통신사별 상이한 혜택 때문에 어떤 상품을 선택해야 할지 고민하는 분들이 많습니다. 저희 **군포인터넷가입 비교센터**는 복잡한 인터넷 가입 과정을 투명하고 합리적으로 안내해 드립니다.</p>
+      <p>인터넷 가입은 단순히 빠른 속도만 보고 결정할 문제가 아닙니다. <strong>SKT, KT, LG U+ 3사 통신사</strong>의 요금제를 비교하고, 고객님의 거주 환경(아파트, 빌라, 원룸 등)과 사용 패턴에 맞는 최적의 요금제를 찾아야 합니다. 특히 기존에 사용하던 모바일 통신사와 결합하여 추가 할인 혜택을 받는 것이 중요합니다. 저희는 군포 전 지역(<strong>산본동, 금정동, 당정동, 부곡동, 대야동, 오금동, 광정동</strong> 등)을 커버하며, 고객님의 현재 상황을 면밀히 분석하여 **저렴한곳**을 추천해 드립니다. 2026년 최신 정보 기준으로 **군포 인터넷 설치**에 대한 모든 궁금증을 해결해 드립니다.</p>
+
+      <h3>군포 지역 맞춤형 인터넷 가입의 장점</h3>
+      <ul>
+        <li><strong>현금 지원금 최대 보장:</strong> 저희는 통신사 본사보다 더 많은 **현금지원** 혜택을 제공하며, 고객님께 최고의 **사은품**과 **지원금**을 드립니다.</li>
+        <li><strong>맞춤형 요금제 추천:</strong> 1인 가구, 4인 가족, 재택근무 환경 등 다양한 사용 패턴을 고려하여 <strong>초고속 인터넷(100M)</strong>, <strong>기가 인터넷(500M)</strong>, <strong>기가 라이트(1G)</strong> 중 최적의 상품을 추천해 드립니다.</li>
+        <li><strong>신속한 설치:</strong> 군포 지역 전문 설치 팀을 운영하여 고객님이 원하는 날짜에 맞춰 **빠른 설치**를 보장합니다. **이사 인터넷 설치** 시에도 복잡한 이전 절차를 대행해 드립니다.</li>
+        <li><strong>투명한 가격 비교:</strong> **인터넷 가격**에 대한 **견적**을 투명하게 공개하고, 통신사별 **장점**과 **단점**을 명확히 비교해 드립니다. 숨겨진 **추가 비용**이 없습니다.</li>
+      </ul>
+
+      <div class="keyword-tags" aria-label="연관 검색 키워드">
+        <a href="#가격비교">군포 인터넷 요금제</a>
+        <a href="#사은품혜택">인터넷 현금지원</a>
+        <a href="#가입절차">군포 이사 인터넷</a>
+        <a href="#고객후기">군포 인터넷 업체 후기</a>
+        <a href="#가격비교">KT SKT LG U+ 비교</a>
+        <a href="#가격비교">군포 산본 기가 인터넷</a>
+        <a href="#견적문의">인터넷 설치 비용</a>
+        <a href="#서비스소개">초고속 인터넷 장단점</a>
+        <a href="#서비스소개">인터넷 가입 순위</a>
+        <a href="#사은품혜택">인터넷 사은품 이벤트</a>
+      </div>
+    </section>
+
+    <div class="call-to-action">
+      <h3>군포 인터넷 요금제, 지금 바로 비교해 보세요!</h3>
+      <p>복잡한 요금제 비교는 저희에게 맡기시고, 현금 사은품과 최적의 요금제만 확인하세요.</p>
+      <a href="#견적문의" class="cta-button">무료 견적 및 현금 지원 문의하기</a>
+    </div>
+
+    <section id="가격비교">
+      <h2>군포 인터넷 요금제 & 통신사별 비교 분석</h2>
+      <p><strong>인터넷 비용</strong>은 통신사, 속도, 결합 상품 유무에 따라 크게 달라집니다. 저희는 <strong>2026년 최신 요금제</strong>를 기준으로 **군포시** 주민들이 가장 많이 선택하는 상품들을 비교 분석하여 합리적인 선택을 돕습니다. 아래 표는 통신사별 대표 상품의 **평균 가격**과 **사은품** 수준을 비교한 것입니다. (정확한 **예상 금액**은 상담을 통해 확인 가능합니다.)</p>
+
+      <h3>통신사별 인터넷 요금제 비교 (2026년 기준, 3년 약정 시)</h3>
+      <div class="price-table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>구분</th>
+              <th>KT (케이티)</th>
+              <th>SKT (에스케이텔레콤)</th>
+              <th>LG U+ (엘지 유플러스)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>인터넷 속도</strong></td>
+              <td>100M / 500M / 1G / 10G</td>
+              <td>100M / 500M / 1G / 2.5G</td>
+              <td>100M / 500M / 1G / 2.5G</td>
+            </tr>
+            <tr>
+              <td><strong>기가인터넷(1G) 월 요금 (VAT 포함)</strong></td>
+              <td>38,500원 ~</td>
+              <td>38,500원 ~</td>
+              <td>38,500원 ~</td>
+            </tr>
+            <tr>
+              <td><strong>대표적인 결합 할인</strong></td>
+              <td>KT 모바일 결합(총액 결합), TV 결합 할인</td>
+              <td>SKT 온가족 할인, TB끼리 온가족 결합</td>
+              <td>LG U+ 참 쉬운 가족 결합, 한방에 Yo/Home</td>
+            </tr>
+            <tr>
+              <td><strong>군포 지역 강점</strong></td>
+              <td><strong>산본신도시</strong> 아파트 지역의 안정적인 FTTH 구축률 (광케이블)</td>
+              <td><strong>금정역</strong> 주변 재개발 지역, 신규 아파트 단지 인프라 확충</td>
+              <td><strong>당정동</strong>, <strong>부곡동</strong> 일대 1인 가구 대상 특화 상품 강세</td>
+            </tr>
+            <tr>
+              <td><strong>장점 및 특징</strong></td>
+              <td>안정성과 품질이 뛰어남, 유선 전화 사용자 선호, 넷플릭스 등 OTT 서비스 연동 우수</td>
+              <td>SKT 모바일 이용자에게 압도적인 할인 혜택, TV 채널 다양성 우수</td>
+              <td>VOD/TV 콘텐츠 강점, 1인 가구 특화 요금제, IPTV 부가서비스 경쟁력</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>인터넷 가입 순위</strong>는 개인의 사용 환경에 따라 달라질 수 있습니다. **저렴한곳**을 찾는다면 통신사별 **장단점**을 명확히 파악하는 것이 중요합니다. **군포인터넷 설치**를 희망하는 고객님은 통신사별로 진행하는 **이벤트**와 **할인** 프로모션을 꼼꼼히 비교해야 합니다. 예를 들어, **군포 금정동**에 위치한 신축 아파트의 경우, 특정 통신사의 인프라 구축이 완료되어 더 많은 혜택을 제공할 수 있습니다.</p>
+
+      <h3>인터넷 가입 시 고려해야 할 추가 요인</h3>
+      <div class="info-box">
+        <h4>✅ 숨겨진 추가 비용 확인 (A-B-C 비교)</h4>
+        <p>인터넷 **견적**을 받을 때 **월 요금** 외에 **추가 비용**이 발생할 수 있습니다. 예를 들어, 셋톱박스 임대료, 와이파이 공유기 임대료, 설치비(면제되는 경우가 많으나 확인 필요) 등이 있습니다. **내돈내산 후기**를 보면, 이러한 추가 비용 때문에 예상했던 **이사 비용**이 늘어나는 경우가 많습니다. 저희는 모든 비용을 투명하게 공개하여 고객님의 **예상 금액**을 정확하게 알려드립니다.</p>
+        <h4>✅ 모바일 결합 상품의 중요성</h4>
+        <p>인터넷 가입 시 가장 큰 **할인**을 받을 수 있는 방법은 모바일 결합입니다. **KT, SKT, LG U+** 모두 가족 구성원이 같은 통신사를 이용할 경우 요금 할인을 제공합니다. 특히 **군포 산본** 지역의 많은 주택에서는 가족 단위의 **인터넷 가입**이 많기 때문에, 결합 상품을 통해 월 통신비를 크게 절약할 수 있습니다.</p>
+        <h4>✅ 이사 및 신규 설치 시기</h4>
+        <p>**이사 인터넷 설치**는 이사 시기(이사 성수기, 비수기)에 따라 설치 가능 일정이 달라질 수 있습니다. **군포시 부곡동**의 신규 입주 단지나 **당정동**의 원룸촌 등 특정 지역은 설치가 몰리는 시기에는 대기가 필요할 수 있습니다. 이사 날짜가 정해지면 미리 **인터넷 업체**에 연락하여 설치 가능 여부를 확인하고, **손없는날**처럼 이사가 몰리는 날짜를 피하는 것이 좋습니다.</p>
+      </div>
+
+      <a href="#견적문의" class="cta-button" aria-label="맞춤형 요금제 상담 신청">요금제 맞춤 상담 신청</a>
+    </section>
+
+    <section id="가입절차">
+      <h2>군포 인터넷 신규 가입 및 이사 설치 절차</h2>
+      <p>저희 **군포인터넷가입 비교센터**를 통해 인터넷을 설치하는 과정은 매우 간단합니다. 복잡한 서류 절차나 통신사 본사와의 씨름 없이, 몇 단계만 거치면 빠르고 편리하게 **군포인터넷** 서비스를 이용할 수 있습니다.</p>
+
+      <h3>1. 가입 문의 및 상담 신청</h3>
+      <p>먼저 저희 홈페이지에서 **무료 견적** 상담을 신청해 주세요. 고객님의 거주 지역(예: **군포시 산본동, 금정동**)과 원하는 인터넷 속도, 모바일 통신사 정보 등을 간단히 입력하면 됩니다. 저희 전문 상담사가 고객님께 직접 연락하여 현재 **군포 지역**에서 가능한 통신사와 **요금제**를 상세히 안내해 드립니다. 특히 **이사 인터넷 설치**의 경우, 이전 주소와 신규 주소의 인터넷 환경을 미리 확인하여 **추가 비용**이 없는지 확인해 드립니다.</p>
+
+      <h3>2. 맞춤형 요금제 비교 및 선택</h3>
+      <p>상담사는 **KT, SKT, LG U+**의 **장단점**을 비교 분석하여 고객님에게 가장 유리한 상품을 추천해 드립니다. 1인 가구는 **100M** 상품을, 재택근무나 스트리밍을 자주 이용하는 고객님은 **500M** 또는 **1G** 상품을 고려하게 됩니다. 이 과정에서 **현금지원**, **사은품** 등 모든 혜택을 투명하게 공개하고, 고객님의 최종 결정을 돕습니다. 저희는 **내돈내산**으로 이용한 **후기**들을 기반으로 **전문**적인 **업체**의 **순위**를 참고하여 믿을 수 있는 정보를 제공합니다.</p>
+
+      <h3>3. 설치 일정 조율 및 계약 체결</h3>
+      <p>요금제를 결정하셨다면, 고객님이 원하는 **설치 날짜**와 시간을 조율합니다. **이사 당일 설치**를 원하실 경우에도 최대한 맞춰드립니다. 계약서 작성 시 **총 요금**, **약정 기간**, **해지 위약금** 등을 명확히 기재하여 **추가 비용** 발생에 대한 우려를 없앱니다. 저희는 **정부**에서 운영하는 **한국소비자원**의 규정을 준수하며, 투명한 계약을 지향합니다.</p>
+
+      <h3>4. 전문 기사 방문 설치 및 사후 관리</h3>
+      <p>약속된 시간에 전문 설치 기사가 방문하여 인터넷과 IPTV 설치를 진행합니다. 설치가 완료되면 속도 테스트를 통해 정상적인 서비스가 제공되는지 확인합니다. 설치 후에도 문제가 발생하면 저희 **군포인터넷가입 비교센터**를 통해 신속한 사후 관리 및 AS를 받을 수 있도록 지원해 드립니다.</p>
+    </section>
+
+    <section id="사은품혜택">
+      <h2>군포 인터넷 현금 사은품 및 지원 혜택 상세 안내</h2>
+      <p><strong>군포인터넷</strong> 가입 시 가장 중요한 고려 사항 중 하나는 **현금 사은품**과 **지원금** 혜택입니다. 통신사 본사에서 가입할 때보다 저희와 같은 **전문** 비교 **업체**를 통해 가입하면 더 많은 **혜택**을 받을 수 있는 것이 일반적입니다. 저희는 통신사별 정책을 면밀히 분석하여 **신규 가입** 고객에게 최대치의 **현금지원**을 약속합니다. **인터넷 가격**이 **저렴한곳**을 찾는 것만큼 **사은품**을 많이 주는 곳을 찾는 것도 중요합니다.</p>
+
+      <div class="info-box">
+        <h4>사은품 지급 정책 및 유의사항 (2026년 기준)</h4>
+        <p><strong>1. 사은품 지급 시기:</strong> 사은품은 설치 완료 후 정해진 기간(보통 1~2주 이내)에 지급됩니다. **가입** 시 상담한 금액이 정확한지 반드시 확인해야 합니다. 일부 **업체**에서는 **상품권**으로 지급하는 경우도 있으니, **현금**으로 받을 수 있는지 미리 확인하세요.</p>
+        <p><strong>2. 불법 업체 주의:</strong> 일부 무허가 **업체**는 과도한 **현금지원**을 미끼로 고객을 유치한 후 약속된 금액을 지급하지 않는 경우가 있습니다. **군포인터넷** 가입 시에는 반드시 통신판매업 신고가 된 **전문 업체**인지 확인해야 합니다. **네이버**나 **구글** 검색 시 나오는 **디시**인사이드, **맘카페** 등의 **내돈내산 후기**를 참고하여 믿을 수 있는 곳을 선택하는 것이 중요합니다.</p>
+        <p><strong>3. 요금제에 따른 사은품 차등:</strong> **현금지원** 금액은 선택한 요금제의 종류와 **약정 기간**에 따라 달라집니다. **기가 인터넷(1G)** 가입 시 **초고속 인터넷(100M)** 가입보다 더 많은 **현금지원**을 받을 수 있습니다. **인터넷 가격**이 높을수록 **사은품**도 많아진다고 생각하시면 됩니다.</p>
+        <p><strong>4. 모바일 결합 시 추가 혜택:</strong> 모바일 결합 상품을 함께 가입하면 **인터넷 비용** 할인은 물론, 추가적인 **사은품**이나 **상품권** **이벤트** 참여 기회가 주어지기도 합니다. **군포시** 주민들은 가족 구성원들의 통신사를 먼저 확인하고 **결합**을 고려하는 것이 현명합니다.</p>
+      </div>
+
+      <a href="#견적문의" class="cta-button" aria-label="사은품 최대 지원 문의">최대 사은품 혜택 받기</a>
+    </section>
+
+    <section id="군포지역특화정보">
+      <h2>군포시 인터넷 환경 분석 및 지역별 특성</h2>
+      <p><strong>군포시</strong>는 경기도의 대표적인 계획도시 중 하나로, 지역별로 인터넷 인프라 환경이 다소 차이가 있습니다. **군포인터넷** 가입 시 주거 지역의 특성을 이해하면 **인터넷 설치**와 **속도**에 대한 **장점**과 **단점**을 미리 파악할 수 있습니다.</p>
+
+      <h3>산본신도시 (산본동, 금정동) 인터넷 환경</h3>
+      <div class="local-info-grid">
+        <div class="local-info-card">
+          <h4>산본동 (산본신도시 중심)</h4>
+          <p>산본동은 1990년대에 조성된 계획도시로, 아파트 단지가 밀집되어 있습니다. 대부분의 아파트는 이미 **KT, SKT, LG U+**의 **FTTH(광케이블)** 인프라가 잘 갖추어져 있어 **기가 인터넷(1G)** 설치가 원활합니다. 다만, 일부 오래된 단지의 경우 인입 시설 노후화로 인해 **초고속 인터넷(100M)** 속도만 보장되는 경우도 있습니다. **산본역**과 **중심상가** 주변은 상업용 **인터넷 설치** 수요도 높아, **전문 업체**의 **견적** 비교가 필수입니다.</p>
+        </div>
+        <div class="local-info-card">
+          <h4>금정동 (금정역세권)</h4>
+          <p>금정동은 최근 **금정역** 복합환승센터 개발과 더불어 신축 아파트 단지(e.g., 금정역 푸르지오, 힐스테이트 금정역 등) 입주가 활발합니다. 신축 아파트 단지는 **1G**를 넘어선 **2.5G**급 **기가 인터넷** 인프라가 기본적으로 갖춰져 있습니다. 하지만 구도심 빌라나 원룸 지역에서는 **인터넷 속도**가 다소 불안정할 수 있으므로, **인터넷 가입** 전 **설치 가능 여부**를 확인해야 합니다. 특히 **금정동**은 **안양**과 인접하여 **통신사**의 경쟁이 치열한 지역이므로 **현금 사은품** 혜택이 좋은 편입니다.</p>
+        </div>
+      </div>
+
+      <h3>군포 기타 지역 (당정동, 부곡동, 대야동 등) 특성</h3>
+      <div class="local-info-grid">
+        <div class="local-info-card">
+          <h4>당정동 및 당정역 주변</h4>
+          <p>당정동은 산업단지와 주거지가 혼재된 지역입니다. **당정역** 주변 원룸 및 오피스텔 단지는 1인 가구의 **인터넷 가입** 수요가 높습니다. **군포인터넷** **전문 업체**들은 1인 가구 특화 요금제(저렴한 **가격**의 **초고속 인터넷**)를 중점적으로 추천합니다. **군포공단** 지역은 **사무실 인터넷** 설치 수요도 많으며, 안정적인 **기가 인터넷** 환경이 필수입니다.</p>
+        </div>
+        <div class="local-info-card">
+          <h4>부곡동 및 송정지구</h4>
+          <p>부곡동은 **부곡지구** 아파트와 **송정지구** 신규 주택단지를 중심으로 형성된 지역입니다. 신규 입주 단지인 만큼 **SKT, KT, LG U+** 통신 3사의 **기가 인터넷** 인프라가 잘 구축되어 있습니다. **이사 인터넷 설치** 시기가 집중되는 때에는 **설치 예약**이 밀릴 수 있으니, 미리 **인터넷 가입**을 준비하는 것이 좋습니다. **부곡동** 주민들은 **네이버**나 **구글**에서 **군포인터넷**을 검색하여 **후기**를 참고하는 경우가 많습니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="고객후기">
+      <h2>실제 고객 후기 및 내돈내산 인터넷 가입 후기</h2>
+      <p>저희 **군포인터넷가입 비교센터**를 통해 인터넷을 설치하신 고객님들의 실제 **내돈내산 후기**를 모았습니다. **인터넷 업체 추천**을 고민하는 분들에게 실질적인 도움이 될 것입니다. 저희는 고객의 **장단점** 피드백을 수렴하여 더욱 나은 서비스를 제공하기 위해 노력합니다.</p>
+
+      <h3>"군포 산본으로 이사하면서 혜택 비교 제대로 했어요!" - 김** 고객님 (산본동, 30대)</h3>
+      <p>산본으로 이사하면서 **인터넷 설치**를 다시 해야 했어요. 기존에는 **SKT**를 사용하고 있었는데, **KT**가 **산본신도시**에서 더 빠르다는 후기가 많아서 고민했습니다. 여기 **전문 업체** 상담을 통해 **SKT** 가족 결합 할인이 **KT**로 넘어가는 것보다 **인터넷 비용** 절약에 더 유리하다는 것을 알았습니다. 상담사분이 <strong>SKT</strong> **기가 인터넷** 요금제와 **현금 사은품**을 꼼꼼히 설명해주셔서 최종 결정에 도움이 되었습니다. 설치도 빨랐고, 약속한 **현금지원**도 잘 받았습니다.</p>
+
+      <h3>"금정동 원룸 인터넷, 싼곳 찾다가 후기 보고 가입했습니다." - 박** 고객님 (금정동, 20대)</h3>
+      <p>금정동 오피스텔로 이사 후 **원룸 인터넷**을 찾고 있었습니다. **인터넷 가격**이 **저렴한곳**이 우선이었는데, **네이버** 카페나 **디시**인사이드 **후기**를 보면 싼 곳은 **사은품**도 적고 **설치**도 불친절하다는 글이 많았습니다. **ChatGPT**나 **Gemini** 같은 **AI**에게 물어봐도 정확한 **견적**은 안 나오더군요. 여기서는 **LG U+** 100M 요금제와 **현금지원**을 상세히 비교해 주셔서 믿고 가입했습니다. 원룸이지만 **기가 인터넷**까지 필요 없어서 **초고속 인터넷**으로 충분히 만족하고 있습니다.</p>
+      
+      <h3>"부곡동 사무실 인터넷 설치, 빠른 대응이 좋았습니다." - 이** 고객님 (부곡동, 40대)</h3>
+      <p>부곡동 사무실 이사로 **사무실 인터넷** 설치가 급했습니다. 다른 **인터넷 업체**들은 **가격**만 비싸고 **견적**을 잘 안 내주더군요. 저희 사무실은 **SKT**를 사용하고 있어서 **SKT** **인터넷 가입**을 알아봤습니다. **군포인터넷 비교센터** 상담사분이 당일 설치 가능한지, **사무실 인터넷**은 일반 가정용과 **차이점**이 무엇인지 자세히 설명해 주셨습니다. **부가세** 포함 **예상 금액**도 정확했고, **설치**도 빨리 완료되어 업무에 지장 없이 시작했습니다. **전문**적인 **업체**를 선택하는 것이 중요함을 느꼈습니다.</p>
+    </section>
+
+    <section id="자주묻는질문" class="faq-accordion">
+      <h2>자주 묻는 질문 (FAQ)</h2>
+      <dl>
+        <dt tabindex="0" aria-expanded="false"><strong>Q. 군포인터넷 가입 시 가장 중요한 고려 사항은 무엇인가요?</strong></dt>
+        <dd><strong>A.</strong> 가장 중요한 것은 <strong>모바일 결합 상품</strong>입니다. **KT, SKT, LG U+** 통신 3사의 모바일 요금제와 인터넷을 결합하면 월 **인터넷 비용**을 크게 절약할 수 있습니다. 예를 들어, 가족 3명이 모두 **SKT**를 사용한다면 **SKT** 인터넷을 선택하는 것이 가장 유리합니다. **현금지원** **사은품** **이벤트**만 보고 결정하면, 월 **가격**을 장기적으로 봤을 때 손해를 볼 수 있습니다. **인터넷 업체 추천**을 받을 때 **장단점**을 반드시 비교해 보세요. <a href="https://www.kcc.go.kr/user.do?mode=view&page=A05030000&dc=K05030000" target="_blank" rel="noopener noreferrer" class="external-link">방송통신위원회 통신요금 정보 보기</a></dd>
+
+        <dt tabindex="0" aria-expanded="false"><strong>Q. 군포 이사 시 인터넷 설치는 어떻게 해야 하나요?</strong></dt>
+        <dd><strong>A.</strong> **이사 인터넷 설치**는 이사 날짜가 정해지면 최대한 빨리 신청하는 것이 좋습니다. **군포시 산본동**이나 **금정동**처럼 아파트 단지가 많은 지역은 **이사** 성수기에는 설치 기사님의 일정이 일찍 마감될 수 있습니다. 기존 통신사를 유지할 경우 <strong>인터넷 이전 설치비</strong>(<strong>예상 금액</strong> 2~3만 원)가 발생하며, **신규 가입** 시에는 **현금지원**을 받을 수 있습니다. 저희 **군포인터넷가입 비교센터**에 문의하시면 **이사** 일정을 고려하여 **빠른 설치**를 도와드립니다.</dd>
+
+        <dt tabindex="0" aria-expanded="false"><strong>Q. 인터넷 약정 기간이 끝나지 않았는데 해지하면 위약금이 얼마나 나오나요?</strong></dt>
+        <dd><strong>A.</strong> 약정 기간(보통 3년) 내에 해지하면 위약금이 발생합니다. 위약금은 약정 기간이 많이 남아있을수록 많아집니다. 통신사별로 위약금 산정 방식이 다르므로, **해지** 전 반드시 **고객센터**를 통해 위약금을 확인해야 합니다. <strong>이사</strong>로 인한 해지 시에도 위약금이 발생할 수 있지만, 증빙 서류를 제출하면 위약금 없이 이전 설치를 지원해 주는 경우도 있으니 상담 시 문의해 보세요. <a href="https://namu.wiki/w/%EC%9D%B8%ED%84%B0%EB%84%B7%20%EC%9C%84%EC%95%BD%EA%B8%88" target="_blank" rel="noopener noreferrer" class="external-link">나무위키 인터넷 위약금 정보</a></dd>
+
+        <dt tabindex="0" aria-expanded="false"><strong>Q. 기가 인터넷(1G)과 초고속 인터넷(100M)의 차이점은 무엇인가요?</strong></dt>
+        <dd><strong>A.</strong> 가장 큰 **차이점**은 속도입니다. **100M**는 100Mbps의 속도로 웹서핑, 일반 동영상 시청에 무리가 없습니다. **1G**는 1,000Mbps의 속도로, 100M보다 약 10배 빠릅니다. **기가 인터넷**은 4K/8K 고화질 스트리밍, 대용량 파일 다운로드, 온라인 게임, 재택근무 등 다수의 기기가 동시에 고성능을 요구할 때 **장점**이 있습니다. 1~2인 가구라면 **100M** 상품도 충분하지만, 가족 구성원이 많거나 헤비 유저라면 **500M** 이상을 추천합니다. **군포시 부곡동** 신축 아파트에서는 <strong>기가 인터넷</strong> 설치가 기본입니다. <a href="https://www.ftc.go.kr/policy/policy_02.jsp?pageid=255" target="_blank" rel="noopener noreferrer" class="external-link">공정거래위원회 통신 분야 표준약관</a></dd>
+        
+        <dt tabindex="0" aria-expanded="false"><strong>Q. 군포인터넷 설치 시 와이파이 공유기는 무상으로 제공되나요?</strong></dt>
+        <dd><strong>A.</strong> 통신사마다 다릅니다. 대부분 **기가 인터넷(1G)** 이상 상품을 가입하거나, **TV 결합 상품**을 이용하면 무상으로 제공되는 경우가 많습니다. <strong>초고속 인터넷(100M)</strong> 가입 시에는 별도 임대료가 발생할 수 있습니다. **인터넷 가격**에 포함되어 있는지, 아니면 별도 **추가 비용**이 있는지 **견적** 상담 시 반드시 확인하세요. **SKT**나 **KT**는 Mesh Wi-Fi (와이파이 확장) 서비스를 제공하여 **군포시** 넓은 평수의 아파트에서도 음영 지역 없이 이용 가능합니다.</dd>
+
+        <dt tabindex="0" aria-expanded="false"><strong>Q. AI(ChatGPT, Gemini)가 인터넷 업체 추천이나 요금제 비교를 더 잘 해주나요?</strong></dt>
+        <dd><strong>A.</strong> **ChatGPT**나 **Gemini**와 같은 **AI**는 일반적인 정보를 제공하고 요금제 **장단점**을 설명해 줄 수 있지만, 고객님의 실시간 거주 환경이나 **이사** 일정을 고려한 맞춤형 **견적**은 불가능합니다. 또한 **실시간 현금지원** **이벤트** **가격**이나 통신사별 숨겨진 **추가 비용**에 대한 정보는 **AI**가 아닌 **전문 업체** 상담을 통해 얻는 것이 정확합니다. **네이버**나 **구글** 검색 결과 상위 노출되는 **전문 업체**를 통해 직접 상담 받는 것을 추천합니다. <a href="https://www.msit.go.kr/web/main/index.do" target="_blank" rel="noopener noreferrer" class="external-link">과학기술정보통신부 홈페이지 (통신 정책 관련 정보)</a></dd>
+      </dl>
+    </section>
+    
+    <section id="견적문의" class="form-section">
+      <h3>군포 인터넷 무료 견적 및 사은품 문의</h3>
+      <p>아래 양식에 정보를 남겨주시면, **군포인터넷** **전문** 상담사가 <strong>2026년 최신 요금제</strong>를 기반으로 가장 유리한 **가격**과 최대 **현금지원** 혜택을 안내해 드립니다. 개인 정보는 안전하게 보호됩니다.</p>
+      <form action="#" method="post">
+        <div class="form-group">
+          <label for="name">성함</label>
+          <input type="text" id="name" name="name" placeholder="고객님의 성함을 입력해주세요." required>
+        </div>
+        <div class="form-group">
+          <label for="phone">연락처</label>
+          <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" required>
+        </div>
+        <div class="form-group">
+          <label for="area">이사/설치 지역 (군포시 상세 주소)</label>
+          <input type="text" id="area" name="area" placeholder="예: 군포시 산본동 000아파트 101동" required>
+        </div>
+        <div class="form-group">
+          <label for="service">신청 희망 서비스</label>
+          <select id="service" name="service" required>
+            <option value="">서비스 선택</option>
+            <option value="internet_only">인터넷 단독 (초고속/기가)</option>
+            <option value="internet_tv">인터넷 + TV 결합</option>
+            <option value="relocation">이사로 인한 이전 설치</option>
+            <option value="office">사무실 인터넷</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="current_provider">현재 사용 중인 통신사 (모바일 결합 확인용)</label>
+          <select id="current_provider" name="current_provider">
+            <option value="none">해당 없음 / 잘 모름</option>
+            <option value="kt">KT</option>
+            <option value="skt">SKT</option>
+            <option value="lgu">LG U+</option>
+            <option value="etc">알뜰폰 / 기타</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <button type="submit">무료 견적 상담 신청하기</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    // FAQ 아코디언 기능 (접기/펼치기)
+    document.querySelectorAll('dl dt').forEach((dt) => {
+      dt.addEventListener('click', () => {
+        const expanded = dt.getAttribute('aria-expanded') === 'true' || false;
+        dt.setAttribute('aria-expanded', !expanded);
+        dt.classList.toggle('active');
+      });
+      dt.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          dt.click();
+        }
+      });
+    });
+  </script>
+  
